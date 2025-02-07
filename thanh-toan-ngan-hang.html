@@ -1,0 +1,146 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Bank Page
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+ </head>
+ <body class="bg-gray-100">
+  <!-- Navigation -->
+  <div class="flex justify-center mt-4">
+   <button class="bg-green-500 text-white font-bold py-2 px-4 rounded-l-lg">
+    <a href="thanh-toan-ngan-hang.html">
+      Ngân hàng
+    </a>
+   </button>
+   <button class="bg-green-200 text-green-500 font-bold py-2 px-4 rounded-r-lg">
+    <a href="thanh-toan-card.html">
+      Thẻ cào
+    </a>
+   </button>
+  </div>
+  <!-- Main Content -->
+  <div class="flex justify-center mt-8">
+   <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+    <div class="flex items-center mb-4">
+     <div class="bg-green-500 text-white font-bold py-1 px-2 rounded-r-lg">
+      ACB
+     </div>
+    </div>
+    
+     
+          <div class="text-center">
+              <img alt="ACB Logo" class="mx-auto mb-4" height="50" src="https://storage.googleapis.com/a1aa/image/VPCGkJ0oCikJloVU6twUEvIHGIf1k0zT7ZhBgp1oW_4.jpg" width="100"/>
+
+              <p class="text-lg font-bold">
+                  STK: <span id="account-number">99977777777999</span>
+                  <i class="fas fa-copy cursor-pointer" onclick="copyAccountNumber()"></i>
+              </p>
+
+              <p class="text-lg font-bold">
+                  CTK: NGUYEN VAN LOC
+              </p>
+              <p class="text-lg">
+                  Nội dung: Facebook Clone 657
+              </p>
+              <p class="text-lg">
+                  Nạp tối thiểu: 200.000 đ
+              </p>
+
+              <img alt="QR Code with a small red heart in the center" class="mx-auto mt-4" height="200" 
+                  src="https://cdn.glitch.global/a86137e8-0a67-4a16-b5f8-257e3d6ff9e7/1719385652838%20(2).jpg?v=1738947692843" width="200"/>
+
+              <!-- Thông báo sao chép -->
+              <p id="copy-message" class="text-lg font-bold text-green-600 opacity-0 transition-opacity duration-500">
+                  ✅ Đã sao chép!
+              </p>
+          </div>
+
+          <script>
+              function copyAccountNumber() {
+                  var accountNumber = document.getElementById("account-number").innerText;
+                  navigator.clipboard.writeText(accountNumber).then(function () {
+                      var copyMessage = document.getElementById("copy-message");
+                      copyMessage.classList.remove("opacity-0"); // Hiện chữ
+                      copyMessage.classList.add("opacity-100");  // Đậm dần
+
+                      setTimeout(function () {
+                          copyMessage.classList.remove("opacity-100"); 
+                          copyMessage.classList.add("opacity-0"); // Mờ dần
+                      }, 2000);
+                  }).catch(function (error) {
+                      console.error("Lỗi sao chép: ", error);
+                  });
+              }
+          </script>
+
+          <style>
+              /* Tạo hiệu ứng chuyển đổi mượt mà */
+              .transition-opacity {
+                  transition: opacity 0.5s ease-in-out;
+              }
+          </style>
+
+
+     
+   </div>
+  </div>
+  <!-- Transaction History -->
+  <div class="flex justify-center mt-8">
+   <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl">
+    <div class="flex items-center mb-4">
+     <div class="bg-green-500 text-white font-bold py-1 px-2 rounded-r-lg">
+      LỊCH SỬ NẠP BANK
+     </div>
+    </div>
+    <table class="min-w-full bg-white">
+     <thead>
+      <tr>
+       <th class="py-2 px-4 border-b">
+        ID
+       </th>
+       <th class="py-2 px-4 border-b">
+        MÃ GIAO DỊCH
+       </th>
+       <th class="py-2 px-4 border-b">
+        LOẠI GIAO DỊCH
+       </th>
+       <th class="py-2 px-4 border-b">
+        CÔNG THANH TOÁN
+       </th>
+       <th class="py-2 px-4 border-b">
+        NGƯỜI CHUYỂN
+       </th>
+       <th class="py-2 px-4 border-b">
+        SỐ TIỀN
+       </th>
+       <th class="py-2 px-4 border-b">
+        NỘI DUNG
+       </th>
+       <th class="py-2 px-4 border-b">
+        TRẠNG THÁI
+       </th>
+       <th class="py-2 px-4 border-b">
+        THỜI GIAN
+       </th>
+       <th class="py-2 px-4 border-b">
+        THAO TÁC
+       </th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <td class="text-center py-4" colspan="10">
+        Không tìm thấy dữ liệu
+       </td>
+      </tr>
+     </tbody>
+    </table>
+   </div>
+  </div>
+ </body>
+</html>
