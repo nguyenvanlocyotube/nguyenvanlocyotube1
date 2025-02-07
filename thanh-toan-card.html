@@ -1,0 +1,166 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Card Recharge
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+ </head>
+ <body class="bg-gray-100 p-4">
+  <div class="max-w-4xl mx-auto">
+   <!-- Navigation Tabs -->
+   <div class="flex justify-center mb-4">
+    <button class="bg-green-200 text-green-800 font-semibold py-2 px-4 rounded-l-lg">
+     <a href="thanh-toan-ngan-hang.html">Ngân hàng</a>
+    </button>
+    <button class="bg-green-600 text-white font-semibold py-2 px-4 rounded-r-lg">
+     <a href="thanh-toan-card.html">Thẻ cào<a/>
+    </button>
+   </div>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+<body class="bg-gray-100 p-4">
+    
+    <div class="max-w-4xl mx-auto">
+        <!-- Form Nạp Thẻ -->
+        <div class="bg-white p-4 rounded shadow mb-4">
+            <div class="flex items-center mb-4">
+                <div class="bg-green-600 text-white py-1 px-3 rounded-l-lg">NẠP THẺ CÀO</div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+                <div>
+                    <label class="block text-gray-700">Loại thẻ</label>
+                    <select id="card-type" class="w-full p-2 border rounded">
+                        <option value="">Chọn loại thẻ</option>
+                        <option value="Viettel">Viettel (Chiết khấu: 25%)</option>
+                        <option value="Mobifone">Mobifone (Chiết khấu: 25%)</option>
+                        <option value="Vietnamobile">Vietnamobile (Chiết khấu: 25%)</option>
+                        <option value="Vinafone">Vinafone (Chiết khấu: 25%)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-gray-700">Mệnh giá</label>
+                    <select id="amount" class="w-full p-2 border rounded">
+                        <option value="">Chọn mệnh giá</option>
+                        <option value="10000">10,000 VNĐ</option>
+                        <option value="20000">20,000 VNĐ</option>
+                        <option value="30000">30,000 VNĐ</option>
+                        <option value="100000">100,000 VNĐ</option>
+                        <option value="200000">200,000 VNĐ</option>
+                        <option value="300000">300,000 VNĐ</option>
+                        <option value="500000">500,000 VNĐ</option>
+                        <option value="1000000">1,000,000 VNĐ</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-gray-700">Seri</label>
+                    <input id="seri" type="text" class="w-full p-2 border rounded" placeholder="Nhập Seri...">
+                </div>
+                <div>
+                    <label class="block text-gray-700">Mã thẻ</label>
+                    <input id="card-code" type="text" class="w-full p-2 border rounded" placeholder="Nhập Mã thẻ...">
+                </div>
+            </div>
+
+            <div class="flex justify-center">
+                <button onclick="checkForm()" class="bg-green-600 text-white font-semibold py-2 px-4 rounded">Nạp thẻ cào</button>
+            </div>
+        </div>
+
+        <!-- Thông báo lỗi -->
+        <div id="alert-box" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 text-white p-4 rounded shadow-lg text-center text-lg font-semibold opacity-0 transition-opacity duration-500">
+            ⚠️ Vui lòng nhập đầy đủ thông tin!
+        </div>
+
+        <!-- Lịch sử nạp thẻ -->
+        <div class="bg-white p-4 rounded shadow">
+            <div class="flex items-center mb-4">
+                <div class="bg-green-600 text-white py-1 px-3 rounded-l-lg">LỊCH SỬ NẠP THẺ CÀO</div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border-b">ID</th>
+                            <th class="py-2 px-4 border-b">LOẠI THẺ</th>
+                            <th class="py-2 px-4 border-b">MỆNH GIÁ</th>
+                            <th class="py-2 px-4 border-b">SERI</th>
+                            <th class="py-2 px-4 border-b">MÃ THẺ</th>
+                            <th class="py-2 px-4 border-b">THỰC NHẬN</th>
+                            <th class="py-2 px-4 border-b">THỜI GIAN</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-table">
+                        <tr>
+                            <td class="py-2 px-4 text-center text-gray-500" colspan="7">Không có dữ liệu</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkForm() {
+            var cardType = document.getElementById("card-type").value;
+            var amount = document.getElementById("amount").value;
+            var seri = document.getElementById("seri").value.trim();
+            var cardCode = document.getElementById("card-code").value.trim();
+
+            if (!cardType || !amount || !seri || !cardCode) {
+                showAlert();
+            } else {
+                addHistory(cardType, amount, seri, cardCode);
+            }
+        }
+
+        function showAlert() {
+            var alertBox = document.getElementById("alert-box");
+            alertBox.classList.remove("opacity-0");
+            alertBox.classList.add("opacity-100");
+
+            setTimeout(() => {
+                alertBox.classList.remove("opacity-100");
+                alertBox.classList.add("opacity-0");
+            }, 3000);
+        }
+
+        function addHistory(cardType, amount, seri, cardCode) {
+            var historyTable = document.getElementById("history-table");
+
+            // Xóa dòng "Không có dữ liệu" nếu có
+            var firstRow = historyTable.rows[0];
+            if (firstRow && firstRow.cells.length === 1) {
+                historyTable.innerHTML = "";
+            }
+
+            var newRow = document.createElement("tr");
+
+            var id = Math.floor(Math.random() * 100000); // Tạo ID ngẫu nhiên
+            var amountNumber = parseInt(amount);
+            var received = amountNumber * 0.75; // Trừ 25% chiết khấu
+
+            newRow.innerHTML = `
+                <td class="py-2 px-4 border-b">${id}</td>
+                <td class="py-2 px-4 border-b">${cardType}</td>
+                <td class="py-2 px-4 border-b">${amountNumber.toLocaleString()} VNĐ</td>
+                <td class="py-2 px-4 border-b">${seri}</td>
+                <td class="py-2 px-4 border-b">${cardCode}</td>
+                <td class="py-2 px-4 border-b">${received.toLocaleString()} VNĐ</td>
+                <td class="py-2 px-4 border-b">${new Date().toLocaleString()}</td>
+            `;
+
+            historyTable.appendChild(newRow);
+
+            // Xóa dữ liệu nhập sau khi nạp
+            document.getElementById("card-type").value = "";
+            document.getElementById("amount").value = "";
+            document.getElementById("seri").value = "";
+            document.getElementById("card-code").value = "";
+        }
+    </script>
+</body>
+</html>
